@@ -16,10 +16,8 @@ class JobScrapeSpider(scrapy.Spider):
     """Main spider for scraping job details"""
     
     name = 'job_scraper'
-    allowed_domains = ['boards.greenhouse.io', 'jobs.lever.co', 'ashbyhq.com', 'github.com', 
-                      'stripe.com', 'rippling.com', 'jobs.punjab.gov.pk', 'careers-githubinc.icims.com',
-                      'employees-githubinc.icims.com', 'globalcareers-githubinc.icims.com',
-                      'globalemployees-githubinc.icims.com']
+    allowed_domains = [
+                      'stripe.com' 'jobs.punjab.gov.pk']
     custom_settings = {
         'CONCURRENT_REQUESTS': 1,
         'DOWNLOAD_DELAY': 2,
@@ -68,8 +66,7 @@ class JobScrapeSpider(scrapy.Spider):
                 url,
                 callback=self.parse,
                 errback=self.errback,
-                meta={'url': url},
-                dont_obey_robotstxt=False
+                meta={'url': url}
             )
     
     def parse(self, response):
