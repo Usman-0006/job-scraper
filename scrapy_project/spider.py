@@ -6,7 +6,7 @@ import scrapy
 import csv
 import logging
 from datetime import datetime
-from scrapy_project.items import JobItem, JobLoader
+from .items import JobItem, JobLoader
 from scrapy.loader import ItemLoader
 
 logger = logging.getLogger(__name__)

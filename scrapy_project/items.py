@@ -4,6 +4,7 @@ Define the data structure for job listings
 
 import scrapy
 from itemloaders.processors import TakeFirst, MapCompose, Join
+from scrapy.loader import ItemLoader
 import re
 
 
@@ -62,7 +63,7 @@ class JobItem(scrapy.Item):
     job_id = scrapy.Field()  # Unique identifier
 
 
-class JobLoader(scrapy.loader.ItemLoader):
+class JobLoader(ItemLoader):
     """Custom item loader with default processors"""
     
     default_output_processor = TakeFirst()
