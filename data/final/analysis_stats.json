@@ -1,0 +1,73 @@
+{
+  "total_jobs": 11,
+  "unique_companies": 11,
+  "unique_locations": 8,
+  "top_skills": {
+    "Python": 5,
+    "Docker": 3,
+    "Git": 3,
+    "AWS": 3,
+    "SQL": 3,
+    "PostgreSQL": 2,
+    "Microservices": 2,
+    "JavaScript": 2,
+    "React": 2,
+    "CSS": 2,
+    "Node.js": 2,
+    "REST APIs": 2,
+    "Statistics": 2,
+    "Kubernetes": 2,
+    "Terraform": 2,
+    "Jenkins": 2,
+    "TypeScript": 2,
+    "Security": 2,
+    "Django": 1,
+    "FastAPI": 1
+  },
+  "top_companies": {
+    "TechCorp": 1,
+    "WebDev Inc": 1,
+    "DataTech Solutions": 1,
+    "CloudOps": 1,
+    "Startup XYZ": 1,
+    "AI Labs": 1,
+    "Quality First": 1,
+    "Modern Stack Inc": 1,
+    "CloudTech Solutions": 1,
+    "UI Masters": 1,
+    "SecureNet": 1
+  },
+  "top_locations": {
+    "Remote": 3,
+    "San Francisco, CA": 2,
+    "New York, NY": 1,
+    "Seattle, WA": 1,
+    "Austin, TX": 1,
+    "Boston, MA": 1,
+    "Denver, CO": 1,
+    "Arlington, VA": 1
+  },
+  "employment_types": {
+    "Full-time": 10,
+    "Internship": 1
+  },
+  "role_levels": {
+    "Intern": 1,
+    "Entry-Level/Junior": 1,
+    "Mid-Level": 7,
+    "Senior/Staff": 2
+  },
+  "top_titles": {
+    "Senior Python Developer": 1,
+    "Junior JavaScript Developer": 1,
+    "Data Analyst Intern": 1,
+    "DevOps Engineer": 1,
+    "Product Manager": 1,
+    "Data Scientist - Machine Learning": 1,
+    "Senior QA Automation Engineer": 1,
+    "Backend Developer - TypeScript/Node.js": 1,
+    "Cloud Solutions Architect": 1,
+    "Frontend Engineer - React": 1,
+    "Security Engineer": 1
+  }
+}
