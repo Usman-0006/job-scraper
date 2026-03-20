@@ -114,7 +114,7 @@ class JobScrapeSpider(scrapy.Spider):
         loader.add_xpath('posted_date', '//span[contains(text(), "Posted")]/following-sibling::text()')
         
         # Extract skills (look for common patterns)
-        loader.add_xpath('required_skills', '//strong[contains(text(), "Required")]/following::li[1:10]/text()')
+        loader.add_xpath('required_skills', '//strong[contains(text(), "Required")]/following::li/text()')
         
         loader.add_value('job_url', response.url)
         loader.add_value('source_board', source_board)
@@ -149,7 +149,7 @@ class JobScrapeSpider(scrapy.Spider):
         loader.add_xpath('posted_date', '//span[@class="posted-date"]/text()')
         
         # Extract skills
-        loader.add_xpath('required_skills', '//h3[contains(text(), "Skills")]/following::li[1:15]/text()')
+        loader.add_xpath('required_skills', '//h3[contains(text(), "Skills")]/following::li/text()')
         
         loader.add_value('job_url', response.url)
         loader.add_value('source_board', source_board)
@@ -167,30 +167,30 @@ class JobScrapeSpider(scrapy.Spider):
         
         # Extract job title (common patterns)
         loader.add_xpath('job_title', 
-            '//h1/text() | //h2[contains(@class, "title")]/text() | //span[@class="job-title"]/text()')
+            '//h1/text() | //h2[contains(@class, "title")]/text() | //span[@class="job-title"]/text() | //h1[@class="job-title"]/text()')
         
         # Extract company name
         loader.add_value('company_name', self._extract_company_from_url(response.url) or 'Unknown')
         
-        # Extract location
+        # Extract location (more flexible)
         loader.add_xpath('location',
-            '//span[@class="location"]/text() | //span[contains(text(), "Location")]/following::text()[1] | //div[@class="job-location"]/text()')
+            '//span[@class="location"]/text() | //span[contains(text(), "Location")]/following::text()[1] | //div[@class="job-location"]/text() | //div[contains(@class, "location")]/text()')
         
-        # Extract job description
+        # Extract job description (more flexible)
         loader.add_xpath('job_description',
-            '//div[@class="job-description"]//text() | //section[@class="description"]//text() | //article//text()')
+            '//div[@class="job-description"]//text() | //section[@class="description"]//text() | //article//text() | //main//text() | //div[contains(@class, "description")]//text()')
         
         # Extract employment type
         loader.add_xpath('employment_type',
-            '//span[contains(text(), "Full-time") or contains(text(), "Part-time") or contains(text(), "Contract")]/text()')
+            '//span[contains(text(), "Full-time") or contains(text(), "Part-time") or contains(text(), "Contract")]/text() | //div[contains(text(), "Full-time") or contains(text(), "Part-time")]/text()')
         
         # Extract posted date
         loader.add_xpath('posted_date',
-            '//span[contains(text(), "Posted") or contains(text(), "Created")]/following::text()[1]')
+            '//span[contains(text(), "Posted") or contains(text(), "Created")]/following::text()[1] | //*[contains(text(), "Posted")]/following::text()[1]')
         
         # Extract skills/requirements
         loader.add_xpath('required_skills',
-            '//h3[contains(text(), "Requirements") or contains(text(), "Required Skills")]/following::li[1:20]/text()')
+            '//h3[contains(text(), "Requirements") or contains(text(), "Required Skills")]/following::li/text() | //div[contains(@class, "requirement")]//li/text() | //ul[@class="requirements"]//li/text() | //div[contains(text(), "Required")]/following::li/text()')
         
         loader.add_value('job_url', response.url)
         loader.add_value('source_board', source_board)
@@ -198,6 +198,7 @@ class JobScrapeSpider(scrapy.Spider):
         loader.add_value('job_id', self._generate_job_id(response.url))
         
         item = loader.load_item()
+        # Less strict - only require job_title (company_name is extracted from URL)
         if item.get('job_title'):
             self.processed_count += 1
             logger.debug(f"Extracted: {item.get('job_title')}")

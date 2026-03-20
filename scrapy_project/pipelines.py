@@ -45,13 +45,13 @@ class JobCleaningPipeline:
     
     def __init__(self):
         self.invalid_count = 0
-        self.required_fields = ['job_title', 'company_name', 'location', 'job_url', 'job_description']
+        self.required_fields = ['job_title', 'job_url']  # Minimal required fields
         logger.info("JobCleaningPipeline initialized")
     
     def process_item(self, item, spider):
         """Validate required fields and clean data"""
         
-        # Check required fields
+        # Check required fields (only job_title and job_url are truly required)
         for field in self.required_fields:
             if not item.get(field):
                 self.invalid_count += 1
